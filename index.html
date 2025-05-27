@@ -1,24 +1,24 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <link rel="shortcut icon" href="static/images/favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👁️</text></svg>">
   <meta charset="utf-8">
   <!-- Meta tags for social media banners, these should be filled in appropriatly as they are your "business card" -->
   <!-- Replace the content tag with appropriate information -->
-  <meta name="description" content="We investigate whether state-of-the-art Vision Language Models can infer human gaze direction through a controlled study revealing significant performance gaps compared to human capabilities.">
+  <meta name="description" content="In a task involving inference of human gaze direction, our controlled study reveals a substantial performance gap between top-tier Vision-Language Models (VLMs) and humans, as well as behavioral patterns in VLMs' response that suggest they are not simply guessing.">
   <meta property="og:title" content="Can Vision Language Models Infer Human Gaze Direction? A Controlled Study"/>
-  <meta property="og:description" content="A rigorous evaluation of VLMs on gaze referential inference tasks, revealing systematic performance gaps compared to humans in understanding gaze direction and spatial reasoning."> 
-  <meta property="og:url" content="https://vlm-gaze.github.io/"/>
+  <meta property="og:description" content="In a task involving inference of human gaze direction, our controlled study reveals a substantial performance gap between top-tier Vision-Language Models (VLMs) and humans, as well as behavioral patterns in VLMs' response that suggest they are not simply guessing."> 
+  <meta property="og:url" content="https://grow-ai-like-a-child.github.io/VLMgaze/"/>
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X630-->
-  <meta property="og:image" content="static/images/teaser_v2.png"/>
-  <meta property="og:image:width" content="1200"/>
-  <meta property="og:image:height" content="630"/>
+  <meta property="og:image" content="static/images/teaser_v2.jpg"/>
+  <meta property="og:image:width" content="1661"/>
+  <meta property="og:image:height" content="649"/>
 
-  <meta name="twitter:title" content="VLMs Cannot Infer Human Gaze Direction">
-  <meta name="twitter:description" content="Our controlled study reveals significant performance gaps between state-of-the-art Vision Language Models and humans in gaze referential inference tasks."> 
+  <meta name="twitter:title" content="VLMs Cannot Yet Infer Human Gaze Direction">
+  <meta name="twitter:description" content="In a task involving inference of human gaze direction, our controlled study reveals a substantial performance gap between top-tier Vision-Language Models (VLMs) and humans, as well as behavioral patterns in VLMs' response that suggest they are not simply guessing."> 
   <!-- Path to banner image, should be in the path listed below. Optimal dimenssions are 1200X600-->
-  <meta name="twitter:image" content="static/images/teaser_v2.png">
-  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:image" content="static/images/teaser_v2.jpg">
+  <meta name="twitter:card" content="static/images/teaser_v2.jpg">
   <!-- Keywords for your paper to be indexed by-->
   <meta name="keywords" content="Vision-Language Models, Gaze Inference, Human Vision, Spatial Reasoning, AI Evaluation">
   <meta name="author" content="Zory Zhang, Pinyuan Feng, Bingyang Wang, Tianwei Zhao, Suyang Yu, Qingying Gao, Hokin Deng, Ziqiao Ma, Yijiang Li, Dezhi Luo (GrowAI Team)">
@@ -26,8 +26,8 @@
 
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <title>Can Vision Language Models Infer Human Gaze Direction?</title>
-  <link rel="icon" type="image/x-icon" href="static/images/favicon.ico">
+  <title>Can Vision Language Models Infer Human Gaze Direction? A Controlled Study</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>👁️</text></svg>">
   <link href="https://fonts.googleapis.com/css?family=Google+Sans|Noto+Sans|Castoro"
   rel="stylesheet">
 
@@ -44,26 +44,48 @@
   <script src="https://cdn.jsdelivr.net/npm/bulma-carousel@4.0.3/dist/js/bulma-carousel.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bulma-slider@2.0.0/dist/js/bulma-slider.min.js"></script>
   
-  <!-- MathJax for LaTeX support -->
-  <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
-  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
-  
   <style>
-    .carousel .item {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
+    #survey-carousel {
+        overflow: hidden !important;
     }
     
-    .carousel .item > img {
-      margin: 0 auto;
-      max-height: 450px;
-      object-fit: contain;
+    .results-carousel {
+        margin-bottom: 3rem !important;
+        overflow: hidden !important;
     }
     
-    .carousel .item .subtitle {
-      margin-top: 15px;
+    .results-carousel .slider-pagination {
+        margin-top: 2rem !important;
+    }
+
+    .results-carousel .item {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin: 5px;
+        overflow: hidden;
+        padding: 20px;
+        font-size: 0;
+    }
+
+    .results-carousel video {
+        margin: 0;
+    }
+    
+    .results-carousel .item > img {
+        margin: 0 auto;
+        max-height: 450px;
+        object-fit: contain;
+    }
+
+    .results-carousel .item .subtitle {
+    margin-top: 15px;
+    margin-bottom: 3rem !important; /* Add more space below subtitle */
+    }
+
+    .slider-pagination .slider-page {
+        background: #000000;
     }
 
     .hero-body {
@@ -87,18 +109,11 @@
     .author-block {
       margin-right: 1rem;
     }
-
-    .teaser-img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-    }
   </style>
 </head>
 <body>
 
-  <section class="hero">
+<section class="hero">
     <div class="hero-body">
       <div class="container is-max-desktop">
         <div class="columns is-centered">
@@ -106,7 +121,7 @@
             <div style="display: flex; align-items: center; justify-content: center; margin-bottom: 20px;">
               <h1 class="title is-1 publication-title">👁️ Can Vision Language Models Infer Human Gaze Direction? A Controlled Study</h1>
             </div>
-            <h4 class="title is-size-4 publication-title" style="color: red;">NeurIPS 2025<span style="font-weight: normal; font-style: italic;"> (Submitted)</span></h4>
+            <h4 class="title is-size-4 publication-title">Preprint under review</h4>
             
             <div class="is-size-5 publication-authors">
               <!-- Paper authors -->
@@ -170,7 +185,7 @@
                   <span class="icon">
                     <i class="fas fa-file-pdf"></i>
                   </span>
-                  <span>Paper</span>
+                  <span>Paper (todo)</span>
                 </a>
               </span>
 
@@ -181,41 +196,20 @@
                   <span class="icon">
                     <i class="ai ai-arxiv"></i>
                   </span>
-                  <span>arXiv</span>
+                  <span>arXiv (todo)</span>
                 </a>
               </span>
 
                   <!-- Github link -->
                   <span class="link-block">
-                    <a href="https://github.com/growing-ai-like-a-child/vlm-gaze" target="_blank"
+                    <a href="https://github.com/grow-ai-like-a-child/referential-gaze" target="_blank"
                     class="external-link button is-normal is-rounded is-dark">
                     <span class="icon">
                       <i class="fab fa-github"></i>
                     </span>
-                    <span>Code</span>
+                    <span>Analysis Code</span>
                   </a>
                 </span>
-
-                <!-- Dataset link -->
-                <span class="link-block">
-                  <a href="#" target="_blank"
-                  class="external-link button is-normal is-rounded is-dark">
-                  <span class="icon">
-                    🗂️
-                  </span>
-                  <span>Dataset</span>
-                </a>
-              </span>
-
-              <span class="link-block">
-                <a href="https://growing-ai-like-a-child.github.io/" target="_blank"
-                class="external-link button is-normal is-rounded is-dark">
-                <span class="icon">
-                  🌱
-                </span>
-                <span>GrowAI Project</span>
-              </a>
-            </span>
 
             </div>
             </div>
@@ -230,15 +224,13 @@
   <div class="container is-max-desktop">
     <div class="hero-body">
       <h2 class="subtitle has-text-centered">
-        <strong>TL;DR:</strong> We reveal a significant performance gap between state-of-the-art Vision Language Models and humans in gaze referential inference tasks, highlighting fundamental limitations in current AI vision capabilities.
+        <strong>TL;DR:</strong> In a task involving inference of human gaze direction, our controlled study reveals a substantial performance gap between top-tier Vision-Language Models (VLMs) and humans, as well as behavioral patterns in VLMs' response that suggest they are not simply guessing.
       </h2>
-      <div class="has-text-centered">
-        <!-- Placeholder for teaser figure - you can replace with actual image -->
-        <img src="static/images/teaser_placeholder.png" alt="Gaze Inference Task Illustration" class="teaser-img" style="max-width: 90%; margin: 20px 0;">
-        <p style="font-style: italic; color: #666; margin-top: 10px;">
-          (a) An illustration of the gaze referential inference task. (b) Performance gap between top-tier VLMs and humans.
-        </p>
-      </div>
+      
+      <video poster="" id="tree" autoplay controls muted loop width="100%">
+        <source src="static/videos/teaser.mp4"
+        type="video/mp4">
+      </video>
     </div>
   </div>
 </section>
@@ -252,18 +244,15 @@
         <h2 class="title is-3">Abstract</h2>
         <div class="content has-text-justified">
           <p>
-            Human gaze direction serves as a powerful social cue for understanding attention and intention. 
-            As Vision Language Models (VLMs) become increasingly sophisticated, a critical question emerges: can these models effectively infer human gaze direction in the same way humans do? 
-            In this work, we present the first systematic evaluation of state-of-the-art VLMs on gaze referential inference tasks through a carefully controlled experimental design.
+            Probing the gaze referential understanding that emerges in Vision Language Models (VLMs) helps evaluate the kind of theory of mind they acquired, a critical socio-cognitive skill that affects how well they can understand humans and naturally interact with humans.
+            In a controlled behavioral study, we curated a set of images with systematically manipulated difficulty and variability, evaluated 111 VLMs' abilities to infer gaze referents, and analyzed their performance using mixed-effect modeling.
           </p>
           <p>
-            We investigate whether VLMs can understand and predict human gaze direction across varying conditions including <strong>gaze angle</strong>, <strong>object proximity</strong>, and <strong>number of target candidates</strong>. 
-            Through rigorous human subject studies with IRB approval and mixed-effect modeling, we establish ground truth performance benchmarks and compare them against multiple leading VLMs including GPT-4V, Claude-3, Gemini, and others.
-          </p>
-          <p>
-            Our findings reveal a <strong>significant performance gap</strong> between VLMs and humans in gaze inference capabilities. 
-            While VLMs perform above random chance, they systematically fail to achieve human-level accuracy across all tested conditions. 
-            This work contributes to our understanding of the limitations in current AI vision systems and provides valuable benchmarks for future model development in social cognition and spatial reasoning.
+            <strong>94 of the 111 VLMs fail to do better than random guessing</strong>, while humans achieve near ceiling accuracy (N=65).
+            Although VLMs as a whole seem to struggle, as we zoom in to five of the top-tier VLMs that perform better than chance, we find that their performance declined with increasing task difficulty but varied only slightly with the specific prompt used and the gazer and objects in the scene.
+            <strong>These behavioral patterns cannot be explained by considering them as stochastic parrots.</strong>
+            Instead, they suggest that top-tier models' underlying inferences approach the gaze inference task in a meaningful way that is subject to the task difficulty, likely a combination of heuristics and guessing.
+            This evidence suggests that VLMs are yet to become technologies that can naturally interact with humans, but the future remains.
           </p>
         </div>
       </div>
@@ -274,168 +263,216 @@
 
 <!-- Key Findings Section -->
 <section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered" style="margin-top: 2rem;">🔍 Key Findings</h2>
-      
-      <div class="columns is-multiline">
-        <div class="column is-half">
-          <div class="box" style="height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
-            <h3 class="title is-4" style="color: white;">
-              <i class="fas fa-chart-line"></i> Performance Gap
-            </h3>
-            <p>State-of-the-art VLMs show <strong>significant performance deficits</strong> compared to humans in gaze referential inference, with accuracy gaps of 30-50% across different conditions.</p>
-          </div>
-        </div>
+    <div class="hero-body">
+      <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered" style="margin-top: 2rem;">🔍 Key Findings</h2>
         
-        <div class="column is-half">
-          <div class="box" style="height: 100%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
-            <h3 class="title is-4">
-              <i class="fas fa-eye"></i> Gaze Factors
-            </h3>
-            <p>Performance varies significantly with <strong>gaze angle</strong>, <strong>object proximity</strong>, and <strong>scene complexity</strong>, revealing systematic limitations in spatial reasoning.</p>
+        <div class="columns is-multiline">
+          <div class="column is-half">
+            <div class="box" style="height: 100%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+              <h3 class="title is-4" style="color: white;">
+                <i class="fas fa-chart-line"></i> Massive Performance Gap
+              </h3>
+              <p><strong>94 of 111 VLMs</strong> performed no better than random guessing (~ 42%), while humans achieved <strong>~92% accuracy</strong>. Even top-tier models like GPT-4o only reached ~50% accuracy. Are they simply guessing randomly?</p>
+            </div>
           </div>
-        </div>
-        
-        <div class="column is-half">
-          <div class="box" style="height: 100%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-            <h3 class="title is-4">
-              <i class="fas fa-users"></i> Human Baseline
-            </h3>
-            <p>Human participants achieved <strong>90%+ accuracy</strong> across conditions, establishing a clear benchmark that current VLMs cannot match.</p>
+          
+          <div class="column is-half">
+            <div class="box" style="height: 100%; background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);">
+              <h3 class="title is-4">
+                <i class="fas fa-eye"></i> Task Difficulty Effects
+              </h3>
+              <p>VLM performance (baseline-corrected) degrades significantly with increasing <strong>distance between objects</strong> and <strong>number of objects</strong>, but surprisingly shows no view angle effects (while humans do).</p>
+            </div>
           </div>
-        </div>
-        
-        <div class="column is-half">
-          <div class="box" style="height: 100%; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
-            <h3 class="title is-4">
-              <i class="fas fa-microscope"></i> Rigorous Method
-            </h3>
-            <p>IRB-approved study with <strong>controlled variables</strong>, mixed-effect modeling, and statistical validation ensures reliable conclusions.</p>
+          
+          <div class="column is-half">
+            <div class="box" style="height: 100%; background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
+              <h3 class="title is-4">
+                <i class="fas fa-brain"></i> Not Random Guessing
+              </h3>
+              <p>Top-tier VLMs show <strong>systematic behavioral patterns</strong> (i.e., Task Difficulty Effects) that suggest meaningful computation rather than random responses, indicating some understanding of gaze direction and spatial relationships.</p>
+            </div>
+          </div>
+          
+          <div class="column is-half">
+            <div class="box" style="height: 100%; background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 100%);">
+              <h3 class="title is-4">
+                <i class="fas fa-exclamation-triangle"></i> Scaling Limitations
+              </h3>
+              <p><strong>Model size and release date</strong> show minimal correlation with performance (R² < 0.05), suggesting fundamental architectural limitations rather than scale issues.</p>
+            </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</section>
+  </section>
 
-<!-- Methodology carousel -->
+<!-- Stimuli carousel -->
 <section class="hero is-small">
-  <div class="hero-body">
-    <div class="container is-max-desktop">
-      <h2 class="title is-3 has-text-centered" style="margin-top: 2rem;">🔬 Experimental Design</h2>
-      
-      <div id="methodology-carousel" class="carousel results-carousel">
-        <div class="item">
-          <div style="text-align: center;">
-            <img src="static/images/experimental_setup.png" alt="Experimental Setup" style="max-width: 80%;">
-            <h3 class="subtitle has-text-centered">
-              <div style="font-size: 1rem; margin-top: 10px;">
-                <strong>Controlled Experimental Setup:</strong> Systematic manipulation of gaze angle, object proximity, and number of candidates to understand factors affecting VLM performance in gaze inference tasks.
-              </div>
-            </h3>
-          </div>
-        </div>
+    <div class="hero-body">
+        <div class="container is-max-desktop">
+        <h2 class="title is-3 has-text-centered" style="margin-top: 2rem;">Controlled Study</h2>
         
-        <div class="item">
-          <div style="text-align: center;">
-            <img src="static/images/human_evaluation.png" alt="Human Evaluation Interface" style="max-width: 80%;">
-            <h3 class="subtitle has-text-centered">
-              <div style="font-size: 1rem; margin-top: 10px;">
-                <strong>Human Evaluation Protocol:</strong> IRB-approved human subject studies with fair compensation and rigorous data collection protocols to establish ground truth performance benchmarks.
-              </div>
-            </h3>
-          </div>
+        <div id="stimuli-carousel" class="carousel results-carousel">
+            <div class="item">
+                <img src="static/images/stimuli/stimuli_v3.jpg"/>
+                <h3 class="subtitle has-text-centered">
+                    <div style="font-size: 1rem; margin-top: 10px;">
+                        Controlled Variables: Systematic manipulation of View (left/right/front), Proximity (1-3 scale), #Objects (2-4), Objects (18 combinations of 9 items), and Gazer (2 actors) across 900 test stimuli. Subfigure (c) depicts stimuli with different numbers of objects on the table (with a Proximity value of 2). The gazer here is actor X.
+                    </div>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/stimuli_y.jpg"/>
+                <h3 class="subtitle has-text-centered">
+                    <div style="font-size: 1rem; margin-top: 10px;">
+                        The gazer is actor Y.
+                    </div>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_36.png"/>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_138.png"/>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_402.png"/>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_550.png"/>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_683.png"/>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_785.png"/>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_871.png"/>
+            </div>
+            <div class="item">
+                <img src="static/images/stimuli/gaze_904.png"/>
+            </div>
         </div>
-        
-        <div class="item">
-          <div style="text-align: center;">
-            <img src="static/images/vlm_testing.png" alt="VLM Testing" style="max-width: 80%;">
-            <h3 class="subtitle has-text-centered">
-              <div style="font-size: 1rem; margin-top: 10px;">
-                <strong>VLM Evaluation:</strong> Comprehensive testing of multiple state-of-the-art models including GPT-4V, Claude-3, Gemini, and others using standardized prompts and evaluation metrics.
-              </div>
-            </h3>
-          </div>
         </div>
-      </div>
     </div>
-  </div>
+    </section>
+<!-- End Stimuli carousel -->
+
+
+<!-- Survey carousel -->
+<section class="hero is-small">
+<div class="hero-body">
+    <div class="container is-max-desktop">
+    <h2 class="title is-3 has-text-centered" style="margin-top: 2rem;">Human Survey Interfaces</h2>
+    
+    <div id="survey-carousel" class="carousel results-carousel">
+        <div class="item">
+            <img src="static/images/survey_prompt.png"/>
+        <h3 class="subtitle has-text-centered">
+            <div style="font-size: 1rem; margin-top: 10px;">
+                The instruction page. We ask participants to press different buttons to make sure they read and follow the instructions.
+            </div>
+        </h3>
+        </div>
+        <div class="item">
+            <img src="static/images/survey_warning.png"/>
+        <h3 class="subtitle has-text-centered">
+            <div style="font-size: 1rem; margin-top: 10px;">
+            This page explains the presence of attention checks. All participants were paid regardless.
+            </div>
+        </h3>
+        </div>
+    
+        <div class="item">
+        <img src="static/images/survey_actor_Y.png"/>
+        <h3 class="subtitle has-text-centered">
+            <div style="font-size: 1rem; margin-top: 10px;">
+            A question page where participants will click one of the buttons to make choices and proceed to the next question.
+            </div>
+        </h3>
+        </div>
+    </div>
+    </div>
+</div>
 </section>
+<!-- End Survey carousel -->
 
 <!-- Results Section -->
 <section class="section">
 <div class="container is-max-desktop">
-  <h2 class="title is-3 has-text-centered">📊 Results</h2>
+  <h2 class="title is-3 has-text-centered">📊 Experiments</h2>
   <div class="content has-text-justified">
     
-    <h3 class="title is-4">Main Results: VLMs vs Human Performance</h3>
+    <h3 class="title is-4">Analysis A: Overall Performance Comparison</h3>
     
     <div class="box" style="background: #f8f9fa; padding: 2rem; margin: 2rem 0;">
       <div class="columns is-multiline">
         <div class="column is-one-third has-text-centered">
-          <div class="has-text-weight-bold is-size-1" style="color: #e74c3c;">~60%</div>
-          <div class="has-text-weight-semibold">Best VLM Performance</div>
-          <div class="is-size-7 has-text-grey">(GPT-4V)</div>
+          <div class="has-text-weight-bold is-size-1" style="color: #f39c12;">~42%</div>
+          <div class="has-text-weight-semibold">Random Baseline</div>
+          <div class="is-size-7 has-text-grey">(Expected chance performance)</div>
+        </div>
+        <div class="column is-one-third has-text-centered">
+          <div class="has-text-weight-bold is-size-1" style="color: #e74c3c;">94/111</div>
+          <div class="has-text-weight-semibold">VLMs at Chance Level</div>
+          <div class="is-size-7 has-text-grey">(Failed statistical significance test)</div>
         </div>
         <div class="column is-one-third has-text-centered">
           <div class="has-text-weight-bold is-size-1" style="color: #27ae60;">~92%</div>
           <div class="has-text-weight-semibold">Human Performance</div>
-          <div class="is-size-7 has-text-grey">(Average across conditions)</div>
-        </div>
-        <div class="column is-one-third has-text-centered">
-          <div class="has-text-weight-bold is-size-1" style="color: #f39c12;">32%</div>
-          <div class="has-text-weight-semibold">Performance Gap</div>
-          <div class="is-size-7 has-text-grey">(Human - Best VLM)</div>
+          <div class="is-size-7 has-text-grey">(Near ceiling accuracy)</div>
         </div>
       </div>
     </div>
 
-    <h3 class="title is-4">Factor Analysis: What Affects Performance?</h3>
+    <h3 class="title is-4">Analysis B: Behavioral Patterns in Top-Tier VLMs and Humans</h3>
+    
+    <p>We conducted a pre-registered study focusing on five top-performing VLMs and humans to understand their behavioral patterns using mixed-effect logistic regression models. To correct for baseline due to the varying number of choices, we look at not the accuracy but the ratio between the odds (not probability) of accuracy and chance baseline.</p>
     
     <div class="columns is-multiline">
       <div class="column is-half">
         <div class="box">
-          <h4 class="title is-5">📐 Gaze Angle Effect</h4>
-          <p>Performance degrades significantly as gaze angle deviates from direct frontal view. VLMs show particular difficulty with <strong>peripheral gaze directions</strong> compared to humans.</p>
+          <h4 class="title is-5">📐 Proximity Effect</h4>
+          <p><strong>Significant for 4/5 VLMs and humans:</strong> Performance degrades as objects get closer together. Unlike random guessing, this shows sensitivity to spatial difficulty.</p>
           <div style="background: #e8f4f8; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
-            <strong>Finding:</strong> 40% accuracy drop for extreme angles vs. direct gaze
+            <strong>Statistical Finding:</strong> p < 0.05 for Gemini, GPT-4o, GLM-4V, InternLM (p = 0.15 for Qwen)
           </div>
         </div>
       </div>
       
       <div class="column is-half">
         <div class="box">
-          <h4 class="title is-5">📏 Proximity Effect</h4>
-          <p>Object distance from the gazer affects inference accuracy. VLMs struggle more with <strong>distant objects</strong> and show reduced spatial reasoning capabilities.</p>
+          <h4 class="title is-5">🎯 Choice Effect</h4>
+          <p><strong>Significant for all 5 VLMs and humans:</strong> Performance drops dramatically as number of candidate objects increases from 2 to 4.</p>
           <div style="background: #f0e8ff; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
-            <strong>Finding:</strong> 25% accuracy drop for distant vs. nearby objects
+            <strong>Statistical Finding:</strong> p < 0.001 for all tested VLMs, effect sizes ranging from -0.165 to -0.285
           </div>
         </div>
       </div>
       
       <div class="column is-half">
         <div class="box">
-          <h4 class="title is-5">🎯 Number of Candidates</h4>
-          <p>Scene complexity significantly impacts performance. VLMs show <strong>exponential degradation</strong> as the number of potential target objects increases.</p>
+          <h4 title is-5">👁️ View Effect</h4>
+          <p><strong>No significant effect for VLMs</strong> but strong effect for humans (p < 0.001). Humans struggle with profile views while VLMs show no such pattern.</p>
           <div style="background: #fff2e8; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
-            <strong>Finding:</strong> 50% accuracy drop with 5+ candidates vs. 2 candidates
+            <strong>Key Insight:</strong> VLMs may use different visual cues than humans for gaze inference
           </div>
         </div>
       </div>
       
       <div class="column is-half">
         <div class="box">
-          <h4 class="title is-5">🧠 Mixed-Effect Modeling</h4>
-          <p>Statistical analysis reveals that VLMs are <strong>significantly above random chance</strong> but consistently below human performance across all conditions.</p>
+          <h4 class="title is-5">🔄 Prompt Robustness</h4>
+          <p><strong>Low prompt sensitivity:</strong> Only Gemini and Qwen showed minimal variance across 12 different prompt templates (variance < 0.1).</p>
           <div style="background: #e8f8e8; padding: 1rem; border-radius: 5px; margin-top: 1rem;">
-            <strong>Finding:</strong> p < 0.001 for human vs. VLM performance difference
+            <strong>Contrasts with:</strong> Previous findings of high prompt sensitivity in VLM gaze tasks
           </div>
         </div>
       </div>
     </div>
 
-    <h3 class="title is-4">Model Ranking and Analysis</h3>
+    <h3 class="title is-4">Summary</h3>
     
     <div style="overflow-x: auto;">
       <table class="table is-striped is-hoverable is-fullwidth">
@@ -443,62 +480,77 @@
           <tr style="background: #667eea; color: white;">
             <th>Model</th>
             <th>Overall Accuracy</th>
-            <th>Easy Conditions</th>
-            <th>Hard Conditions</th>
-            <th>Consistency</th>
+            <th>Above Chance?</th>
+            <th>Proximity Effect</th>
+            <th>Choice Effect</th>
+            <th>Actor Sensitivity</th>
           </tr>
         </thead>
         <tbody>
           <tr style="background: #fff3cd;">
             <td><strong>Human Baseline</strong></td>
-            <td><strong>92.3%</strong></td>
-            <td><strong>95.1%</strong></td>
-            <td><strong>89.2%</strong></td>
-            <td><strong>High</strong></td>
+            <td><strong>~92%</strong></td>
+            <td><strong>Yes (p < 0.001)</strong></td>
+            <td><strong>Significant</strong></td>
+            <td><strong>Significant</strong></td>
+            <td><strong>Individual variation</strong></td>
           </tr>
           <tr>
-            <td>GPT-4V</td>
-            <td>59.8%</td>
-            <td>67.2%</td>
-            <td>51.4%</td>
-            <td>Medium</td>
+            <td>GPT-4o</td>
+            <td>~60%</td>
+            <td>Yes (p < 0.002)</td>
+            <td>Significant</td>
+            <td>Significant</td>
+            <td>Significant</td>
           </tr>
           <tr>
-            <td>Claude-3 Opus</td>
-            <td>52.1%</td>
-            <td>58.9%</td>
-            <td>44.3%</td>
-            <td>Medium</td>
+            <td>Gemini 1.5 Pro</td>
+            <td>~55%</td>
+            <td>Yes (p < 0.002)</td>
+            <td>Significant</td>
+            <td>Significant</td>
+            <td>Not significant</td>
           </tr>
           <tr>
-            <td>Gemini Pro Vision</td>
-            <td>46.7%</td>
-            <td>53.2%</td>
-            <td>39.1%</td>
-            <td>Low</td>
+            <td>GLM-4V</td>
+            <td>~52%</td>
+            <td>Yes (p < 0.002)</td>
+            <td>Significant</td>
+            <td>Significant</td>
+            <td>Significant</td>
           </tr>
           <tr>
-            <td>LLaVA-1.5</td>
-            <td>39.5%</td>
-            <td>45.8%</td>
-            <td>32.1%</td>
-            <td>Low</td>
+            <td>InternLM-XComposer2</td>
+            <td>~48%</td>
+            <td>Yes (p < 0.002)</td>
+            <td>Significant</td>
+            <td>Significant</td>
+            <td>Significant</td>
+          </tr>
+          <tr>
+            <td>Qwen2.5-VL</td>
+            <td>~45%</td>
+            <td>Yes (p < 0.002)</td>
+            <td>Not significant</td>
+            <td>Significant</td>
+            <td>Significant</td>
           </tr>
           <tr style="background: #f8d7da;">
             <td><em>Random Baseline</em></td>
-            <td><em>25.0%</em></td>
-            <td><em>25.0%</em></td>
-            <td><em>25.0%</em></td>
-            <td><em>Perfect</em></td>
+            <td><em>~42%</em></td>
+            <td><em>N/A</em></td>
+            <td><em>None</em></td>
+            <td><em>None</em></td>
+            <td><em>None</em></td>
           </tr>
         </tbody>
       </table>
     </div>
     
     <p style="margin-top: 20px; font-size: 1rem;">
-      <strong>Key Observations:</strong> All tested VLMs perform significantly above random chance, indicating some understanding of gaze-related spatial relationships. 
-      However, the substantial gap between the best-performing models and human capabilities highlights fundamental limitations in current vision-language architectures for social cognition tasks.
-      The performance degradation under challenging conditions suggests that VLMs rely on superficial visual cues rather than robust spatial reasoning.
+      <strong>Critical Finding:</strong> The systematic behavioral patterns observed in top-tier VLMs cannot be explained by random guessing. 
+      Their performance degradation with task difficulty suggests they employ heuristics or approximations that work for easier cases but break down under challenging conditions.
+      The lack of scaling effects (model size R² < 0.05, temporal improvements R² < 0.03) indicates fundamental architectural limitations rather than simply needing more parameters or training.
     </p>
   </div>
 </div>
@@ -511,15 +563,15 @@
   
   <div class="columns is-multiline">
     <div class="column is-half">
-      <div class="box" style="border-left: 4px solid #3273dc;">
+      <div class="box" style="border-left: 4px solid #e74c3c;">
         <h3 class="title is-4">
-          <i class="fas fa-exclamation-triangle" style="color: #ff6b6b;"></i> Current Limitations
+          <i class="fas fa-exclamation-triangle" style="color: #ff6b6b;"></i> Theory of Mind Limitations
         </h3>
         <ul>
-          <li><strong>Spatial Reasoning:</strong> VLMs struggle with complex spatial relationships</li>
-          <li><strong>Social Cognition:</strong> Limited understanding of human attention cues</li>
-          <li><strong>Robustness:</strong> Performance degrades under challenging conditions</li>
-          <li><strong>Generalization:</strong> Poor transfer across different gaze scenarios</li>
+          <li><strong>Fundamental Gap:</strong> VLMs lack the gaze inference abilities that bootstrap human social cognition</li>
+          <li><strong>Scaling Won't Fix It:</strong> Model size and time show no correlation with performance</li>
+          <li><strong>Different Visual Processing:</strong> VLMs don't show human-like view angle effects</li>
+          <li><strong>Heuristic Breakdown:</strong> Performance collapses under increased spatial complexity</li>
         </ul>
       </div>
     </div>
@@ -530,10 +582,10 @@
           <i class="fas fa-lightbulb" style="color: #ffdd57;"></i> Research Directions
         </h3>
         <ul>
-          <li><strong>Architecture:</strong> Develop gaze-aware attention mechanisms</li>
-          <li><strong>Training:</strong> Incorporate social cognition datasets</li>
-          <li><strong>Evaluation:</strong> Create standardized gaze inference benchmarks</li>
-          <li><strong>Applications:</strong> Human-robot interaction, accessibility tools</li>
+          <li><strong>Mechanistic Understanding:</strong> Investigate how top-tier VLMs approximate gaze inference</li>
+          <li><strong>Specialized Training:</strong> Develop gaze-aware training paradigms inspired by human development</li>
+          <li><strong>Architectural Innovation:</strong> Design models that can handle spatial relationships robustly</li>
+          <li><strong>Controlled Studies:</strong> More behavioral probes beyond benchmark scores</li>
         </ul>
       </div>
     </div>
@@ -541,13 +593,44 @@
     <div class="column is-full">
       <div class="box" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
         <h3 class="title is-4" style="color: white;">
-          <i class="fas fa-bullseye"></i> Impact on AI Development
+          <i class="fas fa-microscope"></i> Key Methodological Contribution
         </h3>
-        <p style="font-size: 1.1rem;">
-          Our findings highlight the need for <strong>specialized training approaches</strong> that explicitly incorporate human social cognition principles. 
-          Current VLMs, despite their impressive capabilities in many domains, lack the nuanced understanding of human gaze that is crucial for effective human-AI interaction. 
-          This work provides both <strong>benchmarks</strong> and <strong>insights</strong> to guide future model development toward more socially-aware AI systems.
+        <p style="font-size: 1.1rem; margin-bottom: 1rem;">
+          This work demonstrates how <strong>controlled behavioral studies</strong> can reveal insights that pure benchmarking cannot. 
+          By systematically manipulating difficulty factors and using mixed-effect modeling, we moved beyond simple accuracy scores to understand the <em>kind</em> of computation underlying VLM responses.
         </p>
+        <p style="font-size: 1.1rem;">
+          Our findings suggest that top-tier VLMs are <strong>not simply stochastic parrots</strong> but employ imperfect heuristics that approximate meaningful spatial reasoning for easier cases. 
+          This provides a more nuanced understanding of current VLM capabilities and limitations in social cognition tasks.
+        </p>
+      </div>
+    </div>
+    
+    <div class="column is-half">
+      <div class="box" style="border-left: 4px solid #9b59b6;">
+        <h3 class="title is-4">
+          <i class="fas fa-question-circle" style="color: #9b59b6;"></i> Open Questions
+        </h3>
+        <ul>
+          <li>What mechanisms enable top-tier VLMs to approximate gaze inference?</li>
+          <li>Can human-inspired training improve spatial reasoning?</li>
+          <li>How do different visual cues contribute to VLM vs. human performance?</li>
+          <li>Will models trained on gaze data from infancy show better ToM?</li>
+        </ul>
+      </div>
+    </div>
+    
+    <div class="column is-half">
+      <div class="box" style="border-left: 4px solid #f39c12;">
+        <h3 class="title is-4">
+          <i class="fas fa-road" style="color: #f39c12;"></i> Path Forward
+        </h3>
+        <ul>
+          <li><strong>Beyond Benchmarks:</strong> More controlled behavioral studies of VLM cognition</li>
+          <li><strong>Developmental AI:</strong> Training paradigms inspired by human cognitive development</li>
+          <li><strong>Mechanistic Analysis:</strong> Understanding the computational basis of observed behaviors</li>
+          <li><strong>Real-world Applications:</strong> Improving human-AI interaction through better social understanding</li>
+        </ul>
       </div>
     </div>
   </div>
@@ -559,12 +642,14 @@
   <div class="container is-max-desktop content">
     <h2 class="title">BibTeX</h2>
     <pre><code>
-@article{zhang2024vision,
+@article{vlmGaze2025,
   title={Can Vision Language Models Infer Human Gaze Direction? A Controlled Study},
   author={Zhang, Zory and Feng, Pinyuan and Wang, Bingyang and Zhao, Tianwei and Yu, Suyang and Gao, Qingying and Deng, Hokin and Ma, Ziqiao and Li, Yijiang and Luo, Dezhi},
-  journal={Neural Information Processing Systems (NeurIPS)},
   year={2025},
-  note={Submitted}
+  eprint={2504.16060 TODO},
+  archivePrefix={arXiv},
+  primaryClass={cs.CL TODO},
+  url={https://arxiv.org/abs/2504.16060 TODO}, 
 }
     </code></pre>
   </div>
@@ -592,20 +677,23 @@
 </footer>
 
 <script>
-// Initialize Bulma carousel
-document.addEventListener('DOMContentLoaded', () => {
-  // Initialize all carousels
-  const carousels = bulmaCarousel.attach();
-  
-  // Loop through each carousel and add navigation
-  carousels.forEach(carousel => {
-    // Add some basic navigation if needed
-    carousel.on('before:show', state => {
-      console.log(state);
-    });
-  });
-});
+$(document).ready(function() {
+    // Check for click events on the navbar burger icon
+
+    var options = {
+            slidesToScroll: 1,
+            slidesToShow: 1,
+            loop: true,
+            infinite: true,
+            autoplay: false,
+    }
+
+    // Initialize all div with carousel class
+    var carousels = bulmaCarousel.attach('.carousel', options);
+    
+    bulmaSlider.attach();
+})
 </script>
 
 </body>
-</html> 
+</html>
